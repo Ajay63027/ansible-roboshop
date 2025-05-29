@@ -11,3 +11,11 @@
     ansible.builtin.dnf:
      name: mongodb-org
      state: present
+
+  - name: starting mongodb
+    ansible.builtin.service:
+     name: mongo
+     state: started
+     enabled: yes
+
+  
