@@ -1,0 +1,56 @@
+- name: configure catalogue component
+  hosts: catalogue
+  become: yes
+  tasks:
+  - name: disabling default nodejs
+    ansibe.builtin.command: dnf module disable nodejs -y
+
+  - name: enabling default nodejs
+    ansibe.builtin.command: dnf module enable nodejs:20 -y
+  
+  - name: installing nodejs:20
+    ansibe.builtin.dnf:
+     name: nodejs
+     state: present
+
+  - name: creating roboshop user
+    ansibe.builtin.user:
+     name: roboshop
+     shell: sbin/nologin
+     system: true
+     home: /app
+   
+  - name : creating app directory
+    ansible.builtin.file:
+     path: /app
+     state: directory
+
+  - name: downloading catalogue code
+    ansibe.builtin.get_url:
+     url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+     dest: /tmp/catalogue.zip
+
+  - name: extrating code from zip file
+    ansible.builtin.unarchive:
+     src: /tmp/catalogue.zip
+     dest: /app
+     remote_src: yes
+
+  - name: downloading dependies
+    community.general.npm:
+     path: /app
+
+  - name: copying catalogue service into system service
+    ansibe.builtin.copy:
+     src: catalogue.service
+     dest: /etc/systemd/system/catalogue.service
+
+  - name: deamon-reload
+    ansibe.builtin.systemd_service:
+     deamon_reload: true
+
+  - name : starting and enabling service
+    ansibe.builtin.service:
+     state: started
+     enabled: yes
+     
