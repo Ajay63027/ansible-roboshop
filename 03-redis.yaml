@@ -20,9 +20,9 @@
 
   - name: removing protected module
     ansible.builtin.lineinfile:
-    path: /etc/redis/redis.conf
-    regexp: 'protected-mode'
-    line: protected-mode no
+     path: /etc/redis/redis.conf
+     regexp: 'protected-mode'
+     line: protected-mode no
 
 
   - name: starting starting and enabling redis
