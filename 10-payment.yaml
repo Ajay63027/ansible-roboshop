@@ -5,6 +5,7 @@
   - name: install python dependies
     ansible.builtin.dnf:
      name: "{{ item }}"
+     state: installed
      loop:
      - python3
      - gcc
