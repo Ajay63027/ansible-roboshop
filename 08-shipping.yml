@@ -52,14 +52,14 @@
 
   - name: enable and start shipping
     ansible.builtin.service:
-    name: shipping
-    state: started
-    enabled: yes
+     name: shipping
+     state: started
+     enabled: yes
   
   - name : install mysql client
     ansible.builtin.dnf:
-    name: mysql
-    state: installed
+     name: mysql
+     state: installed
 
   - name: import data
     tags:
