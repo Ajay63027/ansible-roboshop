@@ -52,6 +52,7 @@
 
   - name: enable and start shipping
     ansible.builtin.service:
+    name: shipping
     state: started
     enabled: yes
   
