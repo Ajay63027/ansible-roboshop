@@ -33,12 +33,12 @@
   - name: install maven dependies
     ansible.builtin.command: mvn clean package
     args:
-     chgir: /app
+     chgdir: /app
 
   - name: renanme jar file
     ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
     args:
-     chgir: /app
+     chgdir: /app
     
 
   - name: copying shipping service
