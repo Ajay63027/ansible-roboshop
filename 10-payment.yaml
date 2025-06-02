@@ -2,13 +2,13 @@
   hosts: payment
   become: yes
   tasks: 
-  - name: install python dependies
+  - name: install python3 packages
     ansible.builtin.dnf:
-     name: "{{ item }}"
-     state: installed
+      name: "{{ item }}"
+      state: installed
     loop:
-    - python3
-    - gcc
+    - python3 
+    - gcc 
     - python3-devel
      
   - name: creating roboshop user
