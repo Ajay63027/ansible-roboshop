@@ -10,7 +10,7 @@
      - gcc
      - python3-devel
      
-   - name: creating roboshop user
+  - name: creating roboshop user
     ansible.builtin.user:
      name: roboshop
      shell: /sbin/nologin
